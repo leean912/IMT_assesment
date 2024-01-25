@@ -3,32 +3,21 @@ import 'package:flutter_profile_demo/screens/favourite_profile_page.dart';
 import 'package:flutter_profile_demo/screens/home.dart';
 import 'package:flutter_profile_demo/screens/profile_details_page.dart';
 
-routSetting(RouteSettings settings) {
-  final String? routeName = settings.name;
+class AppRouter {
+  final _allRoutes = <String, Function(RouteSettings settings)>{
+    MyHomePage.myHomePageroute: (settings) => const MyHomePage(),
+    ProfileDetailsPage.profileDetailsPageRoute: (settings) => const ProfileDetailsPage(),
+    FavouriteProfilePage.favouriteProfilePageRoute: (settings) => const FavouriteProfilePage(),
+  };
 
-        if (routeName == MyHomePage.myHomePageroute) {
-          return MaterialPageRoute(
-            builder: (BuildContext context) {
-              return const MyHomePage();
-            },
-          );
-        }
+  MaterialPageRoute<dynamic> routSetting(RouteSettings settings) {
+    Function(RouteSettings)? builder = _allRoutes[settings.name!];
 
-        if (routeName == ProfileDetailsPage.profileDetailsPageRoute) {
-          return MaterialPageRoute(
-            builder: (BuildContext context) {
-              return const ProfileDetailsPage();
-            },
-          );
-        }
+    Widget childWidget = (builder!(settings)) as Widget;
 
-        if (routeName == FavouriteProfilePage.favouriteProfilePageRoute) {
-          return MaterialPageRoute(
-            builder: (BuildContext context) {
-              return const FavouriteProfilePage();
-            },
-          );
-        }
-        
-        return null;
+    return MaterialPageRoute(
+      settings: settings,
+      builder: (ctx) => childWidget,
+    );
+  }
 }

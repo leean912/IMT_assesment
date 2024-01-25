@@ -3,18 +3,19 @@ import 'package:flutter_profile_demo/screens/home.dart';
 import 'package:flutter_profile_demo/services/navigation_service.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final AppRouter _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Profile Demo',
-      initialRoute: MyHomePage.myHomePageroute,
-      onGenerateRoute: (RouteSettings settings) => routSetting(settings),
+      onGenerateRoute: _appRouter.routSetting,
       home: const MyHomePage(),
     );
   }
