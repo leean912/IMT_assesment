@@ -5,7 +5,7 @@ import 'package:flutter_profile_demo/screens/profile_details_page.dart';
 
 class AppRouter {
   final _allRoutes = <String, Function(RouteSettings settings)>{
-    MyHomePage.myHomePageroute: (settings) => const MyHomePage(),
+    HomePage.myHomePageroute: (settings) => const HomePage(),
     ProfileDetailsPage.profileDetailsPageRoute: (settings) => const ProfileDetailsPage(),
     FavouriteProfilePage.favouriteProfilePageRoute: (settings) => const FavouriteProfilePage(),
   };

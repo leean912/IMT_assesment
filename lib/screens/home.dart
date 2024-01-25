@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_demo/cubits/home_cubit/home_cubit.dart';
-import 'package:flutter_profile_demo/cubits/home_cubit/home_state.dart';
 
-class MyHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   static const myHomePageroute = '/myHomePageroute';
 
-  const MyHomePage({super.key});
+  const HomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   late HomeCubit _homeCubit;
 
   @override
   void initState() {
     super.initState();
 
-    _homeCubit = HomeCubit.initial();
+    _homeCubit = HomeCubit.initial(state: HomeStateInitial());
 
     _homeCubit.getUserProfileList();
   }

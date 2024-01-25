@@ -1,9 +1,30 @@
+import 'dart:async';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_demo/screens/home.dart';
+import 'package:flutter_profile_demo/service_locator.dart';
 import 'package:flutter_profile_demo/services/navigation_service.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  runZonedGuarded(() {
+    sl.registerLazySingleton<Dio>(() {
+      final dio = Dio();
+
+      dio.options.connectTimeout = const Duration(seconds: 60);
+      dio.options.receiveTimeout = const Duration(seconds: 60);
+
+      return dio;
+    });
+
+    runApp(MyApp());
+  }, (error, stackTrace) {
+    if (kDebugMode) {
+      print('Error caught: $error');
+      print('Stack trace: $stackTrace');
+    }
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +37,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Profile Demo',
       onGenerateRoute: _appRouter.routSetting,
-      home: const MyHomePage(),
+      home: const HomePage(),
     );
   }
 }

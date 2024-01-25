@@ -1,16 +1,32 @@
+import 'dart:convert';
+
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_profile_demo/cubits/home_cubit/home_state.dart';
 import 'package:flutter_profile_demo/repositories/profile_service_repository.dart';
 
-class HomeCubit extends Cubit<HomeState> {
-  HomeCubit._({HomeState? state}) : super(state ?? HomeState());
+part 'home_state.dart';
 
-  Future<void> getUserProfileList() async {
-    final response = await ProfileServiceRepository().getProfileList();
-    print(response);
-  }
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit._({HomeState? state}) : super(state ?? HomeStateInitial());
 
   factory HomeCubit.initial({HomeState? state}) {
     return HomeCubit._(state: state);
+  }
+
+  Future<void> getUserProfileList() async {
+    if (state is! HomeStateInitial) {
+      return;
+    }
+
+    emit(HomeStateLoading());
+
+    final response = await ProfileServiceRepository().getProfileList();
+
+    if (response != null) {
+      emit(HomeStateLoaded(newUserList: jsonDecode(response.toString())["results"]));
+      return;
+    }
+
+    emit(HomeStateError());
   }
 }
