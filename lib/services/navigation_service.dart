@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-routSetting() {
-  
-=======
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_demo/screens/favourite_profile_page.dart';
 import 'package:flutter_profile_demo/screens/home.dart';
@@ -35,5 +31,4 @@ routSetting(RouteSettings settings) {
         }
         
         return null;
->>>>>>> 5d39302 (second commit)
 }
