@@ -1,39 +1,60 @@
 part of 'home_cubit.dart';
 
 abstract class HomeState extends Equatable {
-  final List<dynamic> userList;
+  final List<ProfileDetails> userListFromUS;
+  final List<ProfileDetails> userListAwayUS;
 
   const HomeState({
-    required this.userList,
+    required this.userListFromUS,
+    required this.userListAwayUS,
   });
 
   @override
   List<Object?> get props => [
-        userList,
+        userListFromUS,
+        userListAwayUS,
       ];
 }
 
 class HomeStateInitial extends HomeState {
-  HomeStateInitial() : super(userList: []);
+  HomeStateInitial()
+      : super(
+          userListFromUS: [],
+          userListAwayUS: [],
+        );
 }
 
 class HomeStateLoading extends HomeState {
-  HomeStateLoading() : super(userList: []);
+  HomeStateLoading()
+      : super(
+          userListFromUS: [],
+          userListAwayUS: [],
+        );
 }
 
 class HomeStateLoaded extends HomeState {
-  final List<dynamic> newUserList;
+  final List<ProfileDetails> newUserListFromUS;
+  final List<ProfileDetails> newUserListAwayUS;
 
   const HomeStateLoaded({
-    required this.newUserList,
-  }) : super(userList: newUserList);
+    required this.newUserListFromUS,
+    required this.newUserListAwayUS,
+  }) : super(
+          userListFromUS: newUserListFromUS,
+          userListAwayUS: newUserListAwayUS,
+        );
 
   @override
   List<Object?> get props => [
-        userList,
+        newUserListFromUS,
+        newUserListAwayUS,
       ];
 }
 
 class HomeStateError extends HomeState {
-  HomeStateError() : super(userList: []);
+  HomeStateError()
+      : super(
+          userListFromUS: [],
+          userListAwayUS: [],
+        );
 }

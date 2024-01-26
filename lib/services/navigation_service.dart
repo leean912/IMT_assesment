@@ -3,6 +3,8 @@ import 'package:flutter_profile_demo/screens/favourite_profile_page.dart';
 import 'package:flutter_profile_demo/screens/home.dart';
 import 'package:flutter_profile_demo/screens/profile_details_page.dart';
 
+final navKey = GlobalKey<NavigatorState>();
+
 class AppRouter {
   final _allRoutes = <String, Function(RouteSettings settings)>{
     HomePage.myHomePageroute: (settings) => const HomePage(),
@@ -20,4 +22,15 @@ class AppRouter {
       builder: (ctx) => childWidget,
     );
   }
+}
+
+Future<T?> pushNamed<T extends Object?>(
+  String routeName, {
+  Object? arguments,
+}) {
+  return navKey.currentState!.pushNamed<T>(routeName, arguments: arguments);
+}
+
+void pop<T extends Object?>([T? data]) {
+  return navKey.currentState!.pop<T>(data);
 }

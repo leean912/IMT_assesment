@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Profile Demo',
       onGenerateRoute: _appRouter.routSetting,
+      navigatorKey: navKey,
       home: const HomePage(),
     );
   }
