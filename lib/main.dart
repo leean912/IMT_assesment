@@ -6,9 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_profile_demo/screens/home.dart';
 import 'package:flutter_profile_demo/service_locator.dart';
 import 'package:flutter_profile_demo/services/navigation_service.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  runZonedGuarded(() {
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    await Hive.initFlutter();
+
     sl.registerLazySingleton<Dio>(() {
       final dio = Dio();
 
