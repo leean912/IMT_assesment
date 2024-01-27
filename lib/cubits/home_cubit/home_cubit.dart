@@ -15,10 +15,6 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> getUserProfileList() async {
-    if (state is! HomeStateInitial) {
-      return;
-    }
-
     emit(HomeStateLoading());
 
     try {
