@@ -4,7 +4,7 @@ import 'package:flutter_profile_demo/models/profile_details.dart';
 
 class AvatarFavouriteWidget extends StatelessWidget {
   final ProfileDetails profileDetails;
-  final VoidCallback favouriteFunction;
+  final GestureTapCallback favouriteFunction;
   final bool isFavourited;
 
   const AvatarFavouriteWidget({

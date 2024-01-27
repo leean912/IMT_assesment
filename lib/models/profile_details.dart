@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class ProfileDetails extends Equatable {
-  final String? profileUrl, name, email, state, country, national;
+  final String? profileUrl, name, email, state, country, national, uuid;
 
   const ProfileDetails({
     this.profileUrl,
@@ -10,6 +10,7 @@ class ProfileDetails extends Equatable {
     this.state,
     this.country,
     this.national,
+    this.uuid,
   });
 
   factory ProfileDetails.fromJson({
@@ -27,12 +28,14 @@ class ProfileDetails extends Equatable {
     }
 
     return ProfileDetails(
-        profileUrl: response["picture"]["medium"],
-        name: response["name"]["first"] + response["name"]["last"],
-        email: response["email"],
-        state: response["location"]["state"],
-        country: response["location"]["country"],
-        national: response["nat"]);
+      profileUrl: response["picture"]["medium"],
+      name: response["name"]["first"] + response["name"]["last"],
+      email: response["email"],
+      state: response["location"]["state"],
+      country: response["location"]["country"],
+      national: response["nat"],
+      uuid: response["login"]["uuid"],
+    );
   }
 
   ProfileDetails withCountryAndProfileUrl() {

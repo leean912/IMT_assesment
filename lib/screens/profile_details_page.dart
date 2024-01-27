@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_demo/components/profile_details_page/avatar_favourite_widget.dart';
+import 'package:flutter_profile_demo/cubits/profile_details_cubit/profile_details_cubit.dart';
 import 'package:flutter_profile_demo/models/profile_details.dart';
 import 'package:flutter_profile_demo/services/navigation_service.dart';
 
@@ -20,11 +22,17 @@ class ProfileDetailsPage extends StatefulWidget {
 class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
   late ProfileDetails? _profileDetails;
 
+  late ProfileDetailsCubit _profileDetailsCubit;
+
   @override
   void initState() {
     super.initState();
 
     _profileDetails = widget.profileDetails;
+
+    _profileDetailsCubit = ProfileDetailsCubit.initial();
+
+    _profileDetailsCubit.getIsFavourited(_profileDetails!.uuid!);
   }
 
   @override
@@ -45,9 +53,15 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AvatarFavouriteWidget(
-                profileDetails: _profileDetails!,
-                favouriteFunction: () {},
+              BlocBuilder<ProfileDetailsCubit, ProfileDetailsState>(
+                bloc: _profileDetailsCubit,
+                builder: (context, profileDetailsState) {
+                  return AvatarFavouriteWidget(
+                    profileDetails: _profileDetails!,
+                    favouriteFunction: () {},
+                    isFavourited: profileDetailsState.isFavourited,
+                  );
+                },
               ),
               const SizedBox(height: 15),
               const Text(

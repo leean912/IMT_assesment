@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_profile_demo/db_model/profile_details_db.dart';
 import 'package:flutter_profile_demo/screens/home.dart';
 import 'package:flutter_profile_demo/service_locator.dart';
 import 'package:flutter_profile_demo/services/navigation_service.dart';
@@ -13,6 +14,11 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     await Hive.initFlutter();
+    Hive.registerAdapter(ProfileDetailsDbAdapter());
+    await Hive.openBox<ProfileDetailsDb>('profiles');
+    Box<ProfileDetailsDb> profileBox = Hive.box<ProfileDetailsDb>('profiles');
+
+    sl.registerLazySingleton<Box>(() => profileBox);
 
     sl.registerLazySingleton<Dio>(() {
       final dio = Dio();

@@ -51,11 +51,9 @@ class HomeCubit extends Cubit<HomeState> {
         return;
       }
     } catch (e) {
-      print('Eror: ${e.toString()}');
+      print('Error: ${e.toString()}');
 
       emit(HomeStateError());
     }
-
-    emit(HomeStateError());
   }
 }

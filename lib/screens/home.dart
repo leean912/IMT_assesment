@@ -35,10 +35,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isHome = _selectedIndex == 0;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: const Text('HOME'),
+        title: Text(isHome ? 'HOME' : 'Favourite List'),
       ),
       body: BlocBuilder<HomeCubit, HomeState>(
         bloc: _homeCubit,
@@ -54,7 +56,7 @@ class _HomePageState extends State<HomePage> {
 
           return Padding(
             padding: const EdgeInsets.all(10),
-            child: _selectedIndex == 0
+            child: isHome
                 ? RefreshIndicator(
                     onRefresh: () => _homeCubit.getUserProfileList(),
                     child: SizedBox(
