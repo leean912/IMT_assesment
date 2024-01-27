@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_profile_demo/models/profile_details.dart';
 import 'package:flutter_profile_demo/screens/favourite_profile_page.dart';
 import 'package:flutter_profile_demo/screens/home.dart';
 import 'package:flutter_profile_demo/screens/profile_details_page.dart';
@@ -8,7 +9,7 @@ final navKey = GlobalKey<NavigatorState>();
 class AppRouter {
   final _allRoutes = <String, Function(RouteSettings settings)>{
     HomePage.myHomePageroute: (settings) => const HomePage(),
-    ProfileDetailsPage.profileDetailsPageRoute: (settings) => const ProfileDetailsPage(),
+    ProfileDetailsPage.profileDetailsPageRoute: (settings) => ProfileDetailsPage(settings.arguments as ProfileDetails),
     FavouriteProfilePage.favouriteProfilePageRoute: (settings) => const FavouriteProfilePage(),
   };
 
