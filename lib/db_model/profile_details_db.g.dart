@@ -17,16 +17,34 @@ class ProfileDetailsDbAdapter extends TypeAdapter<ProfileDetailsDb> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProfileDetailsDb(
-      fields[0] as ProfileDetails,
+      name: fields[0] as String,
+      email: fields[1] as String,
+      profileUrl: fields[2] as String,
+      state: fields[3] as String,
+      country: fields[4] as String,
+      national: fields[5] as String,
+      uuid: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ProfileDetailsDb obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(7)
       ..writeByte(0)
-      ..write(obj.profileDetails);
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.email)
+      ..writeByte(2)
+      ..write(obj.profileUrl)
+      ..writeByte(3)
+      ..write(obj.state)
+      ..writeByte(4)
+      ..write(obj.country)
+      ..writeByte(5)
+      ..write(obj.national)
+      ..writeByte(6)
+      ..write(obj.uuid);
   }
 
   @override

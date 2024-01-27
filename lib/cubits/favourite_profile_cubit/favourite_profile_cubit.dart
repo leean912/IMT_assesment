@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_profile_demo/models/profile_details.dart';
+import 'package:flutter_profile_demo/db_model/profile_details_db.dart';
 import 'package:flutter_profile_demo/service_locator.dart';
 import 'package:hive/hive.dart';
 
@@ -21,16 +21,13 @@ class FavouriteProfileCubit extends Cubit<FavouriteProfileState> {
     emit(FavouriteProfileStateLoading());
 
     try {
-      final list = profileBox.values;
-      print("list: $list");
+      var list = profileBox.values.toList() as List<ProfileDetailsDb>;
 
-
+      emit(FavouriteProfileStateLoaded(newFavouriteProfileList: list));
     } catch (e) {
       print('Error: ${e.toString()}');
 
       emit(FavouriteProfileStateError());
     }
-
-    emit(FavouriteProfileStateError());
   }
 }

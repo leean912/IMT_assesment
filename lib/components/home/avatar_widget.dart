@@ -15,7 +15,7 @@ class AvatarWidget extends StatelessWidget {
     this.showName = false,
     this.isAbleToRoute = true,
     super.key,
-  });
+  }) : assert(width >= 70 && height >= 70, 'width and height must be at least 70');
 
   @override
   Widget build(BuildContext context) {

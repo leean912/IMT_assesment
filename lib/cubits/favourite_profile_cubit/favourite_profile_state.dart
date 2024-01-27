@@ -1,7 +1,7 @@
 part of 'favourite_profile_cubit.dart';
 
 abstract class FavouriteProfileState extends Equatable {
-  final List<ProfileDetails> favouriteProfileList;
+  final List<ProfileDetailsDb> favouriteProfileList;
 
   const FavouriteProfileState({required this.favouriteProfileList});
 
@@ -18,7 +18,7 @@ class FavouriteProfileStateLoading extends FavouriteProfileState {
 }
 
 class FavouriteProfileStateLoaded extends FavouriteProfileState {
-  final List<ProfileDetails> newFavouriteProfileList;
+  final List<ProfileDetailsDb> newFavouriteProfileList;
 
   const FavouriteProfileStateLoaded({
     required this.newFavouriteProfileList,

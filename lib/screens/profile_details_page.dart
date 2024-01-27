@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_demo/components/profile_details_page/avatar_favourite_widget.dart';
+import 'package:flutter_profile_demo/cubits/profile_details_cubit/db/profile_details_db_cubit.dart';
 import 'package:flutter_profile_demo/cubits/profile_details_cubit/profile_details_cubit.dart';
 import 'package:flutter_profile_demo/models/profile_details.dart';
 import 'package:flutter_profile_demo/services/navigation_service.dart';
@@ -23,6 +24,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
   late ProfileDetails? _profileDetails;
 
   late ProfileDetailsCubit _profileDetailsCubit;
+  late ProfileDetailsDbCubit _profileDetailsDbCubit;
 
   @override
   void initState() {
@@ -31,6 +33,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
     _profileDetails = widget.profileDetails;
 
     _profileDetailsCubit = ProfileDetailsCubit.initial();
+    _profileDetailsDbCubit = ProfileDetailsDbCubit.initial();
 
     _profileDetailsCubit.getIsFavourited(_profileDetails!.uuid!);
   }
@@ -58,7 +61,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
                 builder: (context, profileDetailsState) {
                   return AvatarFavouriteWidget(
                     profileDetails: _profileDetails!,
-                    favouriteFunction: () {},
+                    favouriteFunction: () => _profileDetailsDbCubit.saveFavourite(_profileDetails!),
                     isFavourited: profileDetailsState.isFavourited,
                   );
                 },

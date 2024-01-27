@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_profile_demo/db_model/profile_details_db.dart';
 import 'package:flutter_profile_demo/models/profile_details.dart';
 import 'package:flutter_profile_demo/service_locator.dart';
 import 'package:hive/hive.dart';
@@ -19,15 +20,25 @@ class ProfileDetailsDbCubit extends Cubit<ProfileDetailsDbState> {
 
   Future<void> saveFavourite(ProfileDetails profileDetails) async {
     try {
-      var result = profileBox.put(profileDetails.uuid, profileDetails);
-      print(result);
+      await profileBox
+          .put(
+        profileDetails.uuid,
+        ProfileDetailsDb(
+          name: profileDetails.name!,
+          profileUrl: profileDetails.profileUrl!,
+          email: profileDetails.email!,
+          country: profileDetails.country!,
+          state: profileDetails.state!,
+          uuid: profileDetails.uuid!,
+          national: profileDetails.national!,
+        ),
+      )
+          .catchError((onError) {
+        emit(const ProfileDetailsDbStateSaveFail());
+        return;
+      });
 
-      // if (result) {
-      //   emit(const ProfileDetailsDbStateSaveSuccessful());
-      // } else {
-      //   emit(const ProfileDetailsDbStateSaveFail());
-      // }
-
+      emit(const ProfileDetailsDbStateSaveSuccessful());
       return;
     } catch (e) {
       print('Error: ${e.toString()}');

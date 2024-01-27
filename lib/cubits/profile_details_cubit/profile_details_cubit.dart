@@ -37,6 +37,4 @@ class ProfileDetailsCubit extends Cubit<ProfileDetailsState> {
 
     emit(const ProfileDetailsStateError());
   }
-
-  Future<void> saveFavourite(String? uuid) async {}
 }

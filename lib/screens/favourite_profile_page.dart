@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_demo/components/home/avatar_widget.dart';
 import 'package:flutter_profile_demo/cubits/favourite_profile_cubit/favourite_profile_cubit.dart';
+import 'package:flutter_profile_demo/models/profile_details.dart';
+import 'package:flutter_profile_demo/utils/alert.dart';
 
 class FavouriteProfilePage extends StatefulWidget {
   static const favouriteProfilePageRoute = '/favouriteProfilePageRoute';
@@ -39,7 +41,7 @@ class _FavouriteProfilePageState extends State<FavouriteProfilePage> {
                   final favouriteProfile = favouriteList[index];
 
                   return Dismissible(
-                    key: Key(favouriteProfile.uuid!),
+                    key: Key(favouriteProfile.name!),
                     direction: DismissDirection.endToStart,
                     background: Container(
                       color: Colors.red,
@@ -52,19 +54,23 @@ class _FavouriteProfilePageState extends State<FavouriteProfilePage> {
                       ),
                     ),
                     onDismissed: (direction) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Item deleted'),
-                        ),
-                      );
+                      showSnackBarWithText(context, 'Item deleted');
                     },
-                    child: ListTile(
-                      leading: AvatarWidget(
-                        profileDetails: favouriteProfile,
-                        width: 51,
-                        height: 51,
-                      ),
-                      title: Text('${favouriteProfile.name}'),
+                    child: SizedBox(
+                      height: 75,
+                      child: Row(children: [
+                        AvatarWidget(
+                          profileDetails: ProfileDetails(
+                            name: favouriteProfile.name,
+                            profileUrl: favouriteProfile.profileUrl,
+                            country: favouriteProfile.country,
+                            state: favouriteProfile.state,
+                            uuid: favouriteProfile.uuid,
+                            national: favouriteProfile.national,
+                          ),
+                        ),
+                        Expanded(child: Text(favouriteProfile.name)),
+                      ]),
                     ),
                   );
                 }),
