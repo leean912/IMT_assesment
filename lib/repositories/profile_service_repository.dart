@@ -8,7 +8,7 @@ class ProfileServiceRepository {
 
   Future<dynamic> getProfileList() async {
     //add apihandler in future
-    final response = await dio.get('https://randomuser.me/api/?results=20');
+    final response = await dio.get('https://randomuser.me/api/?results=15');
 
     return response;
   }

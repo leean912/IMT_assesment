@@ -17,8 +17,8 @@ void main() async {
     sl.registerLazySingleton<Dio>(() {
       final dio = Dio();
 
-      dio.options.connectTimeout = const Duration(seconds: 60);
-      dio.options.receiveTimeout = const Duration(seconds: 60);
+      dio.options.connectTimeout = const Duration(seconds: 30);
+      dio.options.receiveTimeout = const Duration(seconds: 30);
 
       return dio;
     });
