@@ -23,6 +23,8 @@ class ProfileDetailsDbCubit extends Cubit<ProfileDetailsDbState> {
     ProfileDetailsCubit profileDetailsCubit,
     ProfileDetails profileDetails,
   ) async {
+    emit(const ProfileDetailsDbStateLoading());
+
     try {
       var result = profileBox.get(profileDetails.uuid);
 
@@ -31,20 +33,10 @@ class ProfileDetailsDbCubit extends Cubit<ProfileDetailsDbState> {
 
         profileDetailsCubit.changeFavouriteState(false);
 
+        emit(const ProfileDetailsDbStateRemoveSuccessful());
+
         return;
       }
-
-      print(
-        ProfileDetailsDb(
-          name: profileDetails.name!,
-          profileUrl: profileDetails.profileUrl!,
-          email: profileDetails.email!,
-          country: profileDetails.country!,
-          state: profileDetails.state!,
-          uuid: profileDetails.uuid!,
-          national: profileDetails.national!,
-        ),
-      );
 
       await profileBox
           .put(

@@ -21,6 +21,7 @@ dependencies:
   equatable: ^2.0.5
   get_it: ^7.6.7
   hive_flutter: ^1.1.0
+  focus_detector: ^2.0.1
 
 dev_dependencies:
   flutter_test:
