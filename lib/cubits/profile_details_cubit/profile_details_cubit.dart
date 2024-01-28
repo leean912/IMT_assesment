@@ -34,7 +34,9 @@ class ProfileDetailsCubit extends Cubit<ProfileDetailsState> {
 
       emit(const ProfileDetailsStateError());
     }
+  }
 
-    emit(const ProfileDetailsStateError());
+  void changeFavouriteState(bool isSuccessSave) {
+    emit(ProfileDetailsStateLoaded(newIsFavourited: isSuccessSave));
   }
 }

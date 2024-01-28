@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_profile_demo/cubits/profile_details_cubit/profile_details_cubit.dart';
 import 'package:flutter_profile_demo/db_model/profile_details_db.dart';
 import 'package:flutter_profile_demo/models/profile_details.dart';
 import 'package:flutter_profile_demo/service_locator.dart';
@@ -18,8 +19,33 @@ class ProfileDetailsDbCubit extends Cubit<ProfileDetailsDbState> {
     return ProfileDetailsDbCubit._(state: state);
   }
 
-  Future<void> saveFavourite(ProfileDetails profileDetails) async {
+  Future<void> saveFavourite(
+    ProfileDetailsCubit profileDetailsCubit,
+    ProfileDetails profileDetails,
+  ) async {
     try {
+      var result = profileBox.get(profileDetails.uuid);
+
+      if (result != null) {
+        await profileBox.delete(profileDetails.uuid!);
+
+        profileDetailsCubit.changeFavouriteState(false);
+
+        return;
+      }
+
+      print(
+        ProfileDetailsDb(
+          name: profileDetails.name!,
+          profileUrl: profileDetails.profileUrl!,
+          email: profileDetails.email!,
+          country: profileDetails.country!,
+          state: profileDetails.state!,
+          uuid: profileDetails.uuid!,
+          national: profileDetails.national!,
+        ),
+      );
+
       await profileBox
           .put(
         profileDetails.uuid,
@@ -35,8 +61,10 @@ class ProfileDetailsDbCubit extends Cubit<ProfileDetailsDbState> {
       )
           .catchError((onError) {
         emit(const ProfileDetailsDbStateSaveFail());
+
         return;
       });
+      profileDetailsCubit.changeFavouriteState(true);
 
       emit(const ProfileDetailsDbStateSaveSuccessful());
       return;

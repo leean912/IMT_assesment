@@ -61,7 +61,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
                 builder: (context, profileDetailsState) {
                   return AvatarFavouriteWidget(
                     profileDetails: _profileDetails!,
-                    favouriteFunction: () => _profileDetailsDbCubit.saveFavourite(_profileDetails!),
+                    favouriteFunction: () => _profileDetailsDbCubit.saveFavourite(_profileDetailsCubit,_profileDetails!),
                     isFavourited: profileDetailsState.isFavourited,
                   );
                 },
