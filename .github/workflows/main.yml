@@ -45,7 +45,7 @@ jobs:
       - name: Run tests
         run: |
           flutter test --coverage
-          echo "Coverage is below 90%"
+          echo "Test Hello World"
           COVERAGE=$(lcov -r coverage/lcov.info '/flutter/**' -o coverage/lcov.info | grep -o -E '([0-9]+[.])?[0-9]+' | head -n 1)
             if (( $(echo "$COVERAGE < 90" | bc -l) )); then
               echo "Coverage is below 90%"
