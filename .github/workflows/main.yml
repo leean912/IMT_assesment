@@ -46,11 +46,20 @@ jobs:
         run: |
           flutter test --coverage
           echo "Test Hello World"
-          COVERAGE=$(grep -E 'lines\.*:' coverage/lcov.info | awk '{print $2}' | cut -d '.' -f 1)
+          COVERAGE=$(awk 'BEGIN {covered=0; total=0} /SF:/{flag=1} flag && /DA:/{total++; if ($NF != 0) covered++} /end_of_record/{flag=0} END {printf "%d\n", (100 * covered) / total}' coverage/lcov.info)
+          if [ -z "$COVERAGE" ]; then
+            echo "Failed to extract coverage percentage"
+            exit 1
+          fi
           if [ "$COVERAGE" -lt 90 ]; then
             echo "Coverage is below 90%"
             exit 1
           fi
+          # COVERAGE=$(grep -E 'lines\.*:' coverage/lcov.info | awk '{print $2}' | cut -d '.' -f 1)
+          # if [ "$COVERAGE" -lt 90 ]; then
+          #   echo "Coverage is below 90%"
+          #   exit 1
+          # fi
 
       # Runs a set of commands using the runners shell
       - name: Start release build
