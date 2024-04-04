@@ -46,11 +46,11 @@ jobs:
         run: |
           flutter test --coverage
           echo "Test Hello World"
-          COVERAGE=$(lcov -r coverage/lcov.info '/flutter/**' -o coverage/lcov.info | grep -o -E '([0-9]+[.])?[0-9]+' | head -n 1)
-            if (( $(echo "$COVERAGE < 90" | bc -l) )); then
-              echo "Coverage is below 90%"
-              exit 1
-            fi
+          COVERAGE=$(grep -E 'lines\.*:' coverage/lcov.info | awk '{print $2}' | cut -d '.' -f 1)
+          if [ "$COVERAGE" -lt 90 ]; then
+            echo "Coverage is below 90%"
+            exit 1
+          fi
 
       # Runs a set of commands using the runners shell
       - name: Start release build
