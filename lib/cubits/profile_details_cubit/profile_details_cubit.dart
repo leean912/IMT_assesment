@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_demo/service_locator.dart';
 import 'package:hive/hive.dart';
@@ -30,7 +31,7 @@ class ProfileDetailsCubit extends Cubit<ProfileDetailsState> {
 
       return;
     } catch (e) {
-      print('Error: ${e.toString()}');
+      debugPrint('Error: ${e.toString()}');
 
       emit(const ProfileDetailsStateError());
     }

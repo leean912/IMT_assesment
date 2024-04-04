@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_demo/cubits/favourite_profile_cubit/favourite_profile_cubit.dart';
 import 'package:flutter_profile_demo/db_model/profile_details_db.dart';
@@ -35,7 +36,7 @@ class FavouriteProfileDbCubit extends Cubit<FavouriteProfileDbState> {
 
       favouriteProfileCubit.getFavouriteUserProfileList();
     } catch (e) {
-      print('Error: ${e.toString()}');
+      debugPrint('Error: ${e.toString()}');
 
       emit(const FavouriteProfileDbStateDeleteFail());
     }

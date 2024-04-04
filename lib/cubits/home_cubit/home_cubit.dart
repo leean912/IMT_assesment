@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_demo/models/profile_details.dart';
 import 'package:flutter_profile_demo/repositories/profile_service_repository.dart';
@@ -51,7 +52,7 @@ class HomeCubit extends Cubit<HomeState> {
         return;
       }
     } catch (e) {
-      print('Error: ${e.toString()}');
+      debugPrint('Error: ${e.toString()}');
 
       emit(HomeStateError());
     }

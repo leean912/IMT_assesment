@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_profile_demo/cubits/profile_details_cubit/profile_details_cubit.dart';
 import 'package:flutter_profile_demo/db_model/profile_details_db.dart';
@@ -61,7 +62,7 @@ class ProfileDetailsDbCubit extends Cubit<ProfileDetailsDbState> {
       emit(const ProfileDetailsDbStateSaveSuccessful());
       return;
     } catch (e) {
-      print('Error: ${e.toString()}');
+      debugPrint('Error: ${e.toString()}');
 
       emit(const ProfileDetailsDbStateError());
     }

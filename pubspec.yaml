@@ -2,17 +2,16 @@ name: flutter_profile_demo
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.1.3
@@ -32,5 +31,20 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-
   uses-material-design: true
+
+flavors:
+  dev:
+    flavoring: "dev"
+  staging:
+    flavoring: "staging"
+  release:
+    flavoring: "release"
+
+  linter:
+    rules:
+      require_trailing_commas: true
+      prefer_relative_imports: true
+      avoid_empty_else: true
+      always_use_package_imports: true
+      avoid_print: true

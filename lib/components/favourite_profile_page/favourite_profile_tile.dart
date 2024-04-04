@@ -54,7 +54,7 @@ class FavouriteProfileTile extends StatelessWidget {
               profileDetails: profileObj,
               isAbleToRoute: false,
             ),
-            Expanded(child: Text(favouriteProfile.name!)),
+            Expanded(child: Text(favouriteProfile.name)),
           ]),
         ),
       ),
