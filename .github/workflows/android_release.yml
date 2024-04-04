@@ -39,6 +39,18 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: |
+          flutter test --coverage
+          COVERAGE=$(lcov -r coverage/lcov.info '/flutter/**' -o coverage/lcov.info | grep -o -E '([0-9]+[.])?[0-9]+' | head -n 1)
+            if (( $(echo "$COVERAGE < 90" | bc -l) )); then
+              echo "Coverage is below 90%"
+              exit 1
+            fi
+
       # Runs a set of commands using the runners shell
       - name: Start release build
         run: flutter build appbundle
