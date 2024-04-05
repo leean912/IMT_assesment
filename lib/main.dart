@@ -18,13 +18,12 @@ void main() async {
     await Hive.openBox<ProfileDetailsDb>('profiles');
     Box<ProfileDetailsDb> profileBox = Hive.box<ProfileDetailsDb>('profiles');
 
-    sl.registerLazySingleton<Box>(() => profileBox);
+    sl.registerLazySingleton<Box<ProfileDetailsDb>>(() => profileBox);
 
     sl.registerLazySingleton<Dio>(() {
-      final dio = Dio();
-
-      dio.options.connectTimeout = const Duration(seconds: 30);
-      dio.options.receiveTimeout = const Duration(seconds: 30);
+      final dio = Dio()
+        ..options.connectTimeout = const Duration(seconds: 30)
+        ..options.receiveTimeout = const Duration(seconds: 30);
 
       return dio;
     });

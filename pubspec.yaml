@@ -21,6 +21,7 @@ dependencies:
   get_it: ^7.6.7
   hive_flutter: ^1.1.0
   focus_detector: ^2.0.1
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:
@@ -33,18 +34,21 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-flavors:
-  dev:
-    flavoring: "dev"
-  staging:
-    flavoring: "staging"
-  release:
-    flavoring: "release"
+assets:
+  - assets/
 
-  linter:
-    rules:
-      require_trailing_commas: true
-      prefer_relative_imports: true
-      avoid_empty_else: true
-      always_use_package_imports: true
-      avoid_print: true
+# flavors:
+#   dev:
+#     flavoring: "dev"
+#   staging:
+#     flavoring: "staging"
+#   release:
+#     flavoring: "release"
+
+  # linter:
+  #   rules:
+  #     require_trailing_commas: true
+  #     prefer_relative_imports: true
+  #     avoid_empty_else: true
+  #     always_use_package_imports: true
+  #     avoid_print: true

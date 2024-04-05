@@ -58,6 +58,75 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    // flavorDimensions "app"
+    // productFlavors {
+ 
+    //     app1 {
+    //         dimension "app"
+    //         applicationId "com.example.flavorsexample.app1"
+    //         versionCode 1
+    //         versionName "1.0"
+    //     }
+ 
+    //     app2 {
+    //         dimension "app"
+    //         applicationId "com.example.flavorsexample.app2"
+    //         versionCode 1
+    //         versionName "1.0"
+    //     }
+    // }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        free {
+            dimension "default"
+            resValue "string", "app_name", "free flavor example"
+            applicationIdSuffix ".free"
+        }
+
+        dev {
+            dimension "default"
+            resValue "string", "app_name", "free flavor example"
+            applicationIdSuffix ".dev"
+        }
+
+        stag {
+            dimension "default"
+            resValue "string", "app_name", "staging flavor example"
+            applicationIdSuffix ".stag"
+        }
+
+        prod {
+            dimension "default"
+            resValue "string", "app_name", "production flavor example"
+            applicationIdSuffix ".prod"
+        }
+    }
+
+
+    // flavorDimensions "environment"
+
+    // productFlavors {
+    //     development {
+    //         dimension "environment"
+    //         applicationIdSuffix ".development"
+    //         versionNameSuffix "-dev"
+    //     }
+
+    //     staging {
+    //         dimension "environment"
+    //         applicationIdSuffix ".staging"
+    //         versionNameSuffix "-staging"
+    //     }
+
+    //     production {
+    //         dimension "environment"
+    //         applicationIdSuffix ".production"
+    //         versionNameSuffix "-prod"
+    //     }
+    // }
 }
 
 flutter {

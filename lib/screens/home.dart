@@ -6,8 +6,9 @@ import 'package:flutter_profile_demo/screens/favourite_profile_page.dart';
 
 class HomePage extends StatefulWidget {
   static const myHomePageroute = '/myHomePageroute';
+  final int? selectedIndex; // for testing purpose
 
-  const HomePage({super.key});
+  const HomePage({this.selectedIndex, super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,6 +26,8 @@ class _HomePageState extends State<HomePage> {
     _homeCubit = HomeCubit.initial(state: HomeStateInitial());
 
     _homeCubit.getUserProfileList();
+
+    _selectedIndex = widget.selectedIndex ?? 0;// for testing purpose
   }
 
   void _onItemTapped(int index) {
