@@ -13,6 +13,11 @@ void main() async {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
+    const String? appFlavor =
+        String.fromEnvironment('FLUTTER_APP_FLAVOR') != '' ? String.fromEnvironment('FLUTTER_APP_FLAVOR') : null;
+
+    debugPrint('appFlavor: $appFlavor');
+
     await Hive.initFlutter();
     Hive.registerAdapter(ProfileDetailsDbAdapter());
     await Hive.openBox<ProfileDetailsDb>('profiles');
@@ -20,13 +25,9 @@ void main() async {
 
     sl.registerLazySingleton<Box<ProfileDetailsDb>>(() => profileBox);
 
-    sl.registerLazySingleton<Dio>(() {
-      final dio = Dio()
-        ..options.connectTimeout = const Duration(seconds: 30)
-        ..options.receiveTimeout = const Duration(seconds: 30);
-
-      return dio;
-    });
+    sl.registerLazySingleton<Dio>(() => Dio()
+      ..options.connectTimeout = const Duration(seconds: 30)
+      ..options.receiveTimeout = const Duration(seconds: 30));
 
     runApp(MyApp());
   }, (error, stackTrace) {

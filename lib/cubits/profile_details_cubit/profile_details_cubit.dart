@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_profile_demo/db_model/profile_details_db.dart';
 import 'package:flutter_profile_demo/service_locator.dart';
 import 'package:hive/hive.dart';
 
@@ -10,7 +11,7 @@ class ProfileDetailsCubit extends Cubit<ProfileDetailsState> {
   final Box profileBox;
 
   ProfileDetailsCubit._({ProfileDetailsState? state})
-      : profileBox = sl.get<Box>(),
+      : profileBox = sl.get<Box<ProfileDetailsDb>>(),
         super(state ?? const ProfileDetailsStateInitial());
 
   factory ProfileDetailsCubit.initial({ProfileDetailsState? state}) {

@@ -13,7 +13,7 @@ class ProfileDetailsDbCubit extends Cubit<ProfileDetailsDbState> {
   final Box profileBox;
 
   ProfileDetailsDbCubit._({ProfileDetailsDbState? state})
-      : profileBox = sl.get<Box>(),
+      : profileBox = sl.get<Box<ProfileDetailsDb>>(),
         super(state ?? const ProfileDetailsDbStateInitial());
 
   factory ProfileDetailsDbCubit.initial({ProfileDetailsDbState? state}) {

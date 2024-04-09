@@ -88,7 +88,7 @@ android {
 
         dev {
             dimension "default"
-            resValue "string", "app_name", "free flavor example"
+            resValue "string", "app_name", "dev flavor example"
             applicationIdSuffix ".dev"
         }
 

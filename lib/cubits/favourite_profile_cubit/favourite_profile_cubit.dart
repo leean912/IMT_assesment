@@ -11,7 +11,7 @@ class FavouriteProfileCubit extends Cubit<FavouriteProfileState> {
   final Box profileBox;
 
   FavouriteProfileCubit._({FavouriteProfileState? state})
-      : profileBox = sl.get<Box>(),
+      : profileBox = sl.get<Box<ProfileDetailsDb>>(),
         super(state ?? FavouriteProfileStateInitial());
 
   factory FavouriteProfileCubit.initial({FavouriteProfileState? state}) {

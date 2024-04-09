@@ -1,8 +1,15 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_profile_demo/cubits/favourite_profile_cubit/db/favourite_profile_db_cubit.dart';
+import 'package:flutter_profile_demo/cubits/favourite_profile_cubit/favourite_profile_cubit.dart';
+import 'package:flutter_profile_demo/db_model/profile_details_db.dart';
+import 'package:flutter_profile_demo/service_locator.dart';
 import 'package:flutter_profile_demo/services/navigation_service.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 /// Make sure to call sl.reset() before calling this function to reset any registered types
 Future<Widget> getTestMaterialAppBoilerplate(
@@ -58,4 +65,17 @@ class TestAppState extends State<TestApp> {
       ),
     );
   }
+}
+
+registerSl({FavouriteProfileCubit? favouriteProfileCubit}) {
+  sl.registerLazySingleton<Dio>(() => Dio());
+  sl.registerLazySingleton<FavouriteProfileCubit>(() => favouriteProfileCubit ?? FavouriteProfileCubit.initial());
+}
+
+registerDbSl({
+  Box<ProfileDetailsDb>? profileBox,
+  FavouriteProfileDbCubit? favouriteProfileDbCubit,
+}) async {
+  sl.registerLazySingleton<Box<ProfileDetailsDb>>(() => profileBox ?? Hive.box<ProfileDetailsDb>('profiles'));
+  sl.registerLazySingleton<FavouriteProfileDbCubit>(() => favouriteProfileDbCubit ?? FavouriteProfileDbCubit.initial());
 }
